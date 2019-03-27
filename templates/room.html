@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block body %}
+
+<h1>{{ room }}</h1>
+
+<input id="message" type="text" placeholder="Enter message...">
+<input type="submit" value="Send" onclick="send_message()">
+
+<script type="text/javascript">
+// Sends a message to the server (AJAX)
+function send_message() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("messages-box").innerHTML = this.responseText;
+        }
+    };
+    var msg = document.getElementById("message").value
+    var url = '{{ url_for("send_message") }}?room={{ room }}&msg=' + msg
+    xhttp.open('GET', url, true);
+    xhttp.send();
+}
+
+function refresh() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("messages-box").innerHTML = this.responseText;
+        }
+    };
+    var msg = document.getElementById("message").value
+    var url = '{{ url_for("get_messages") }}?room={{ room }}'
+    xhttp.open('GET', url, true);
+    xhttp.send();
+    
+    // Refresh the chat window every 3 seconds
+    setTimeout(function() {
+        refresh()
+    }, 3000); 
+}
+
+refresh();
+
+</script>
+
+{% include 'messages.html' %}
+
+{% endblock %}

@@ -1,0 +1,32 @@
+#msg-box {
+    margin-top: 10px;
+}
+
+.msg {
+    padding: 10px;
+    display: block;
+}
+
+.msg-author {
+    margin: 0;
+    display: inline;
+}
+
+.msg-date {
+    margin: 0;
+    color: rgba(180, 180, 180, 0.85);
+    display: inline;
+}
+
+.msg-content {
+    margin: 0;
+    margin-top: 5px;
+}
+
+.msg-light {
+    background-color: rgb(41, 41, 41);
+}
+
+.msg-dark {
+    background-color: rgb(24, 24, 24);
+}

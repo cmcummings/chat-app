@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block body %}
+
+<h2>Chatrooms available:</h2>
+
+{% for room in rooms %}
+
+<a href="{{ url_for('room', name=room.name) }}">{{ room.name }}</a><br>
+
+{% endfor %}
+
+{% endblock %}
