@@ -5,49 +5,70 @@
 {% endblock %}
 
 {% block body %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='message-box.css') }}">
 
 <h1>{{ room }}</h1>
 
-<input id="message" type="text" placeholder="Enter message...">
-<input type="submit" value="Send" onclick="send_message()">
+<div id="msg-box">
+    {% include 'messages.html' %}
+</div>
+
+<form id="msg-form">
+    <input id="message" type="text" placeholder="Enter message...">
+    <input type="submit" value="Send">
+</form>
 
 <script type="text/javascript">
-// Sends a message to the server (AJAX)
-function send_message() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("messages-box").innerHTML = this.responseText;
-        }
-    };
-    var msg = document.getElementById("message").value
-    var url = '{{ url_for("send_message") }}?room={{ room }}&msg=' + msg
-    xhttp.open('GET', url, true);
-    xhttp.send();
-}
-
-function refresh() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("messages-box").innerHTML = this.responseText;
-        }
-    };
-    var msg = document.getElementById("message").value
-    var url = '{{ url_for("get_messages") }}?room={{ room }}'
-    xhttp.open('GET', url, true);
-    xhttp.send();
+    var msg_input = document.getElementById("message")
     
-    // Refresh the chat window every 3 seconds
-    setTimeout(function() {
-        refresh()
-    }, 3000); 
-}
-
-refresh();
-
-</script>
-
-{% include 'messages.html' %}
+    document.getElementById("msg-form").onsubmit = function(e) {
+        e.preventDefault()
+        send_message()
+    }
+    
+    // Sends a message to the server (AJAX)
+    function send_message() {
+        var msg_box = document.getElementById("msg-box")
+    
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                msg_box.innerHTML = this.responseText;
+                msg_input.value = "";
+                msg_box.scrollTo(0, msg_box.scrollHeight);
+            }
+        };
+    
+        var msg = msg_input.value
+        var url = '{{ url_for("send_message") }}?room={{ room }}&msg=' + msg
+        xhttp.open('GET', url, true);
+        xhttp.send();
+    }
+    
+    function refresh() {
+        var msg_box = document.getElementById("msg-box")
+    
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                msg_box.innerHTML = this.responseText;
+                msg_box.scrollTo(0, msg_box.scrollHeight);
+            }
+        };
+        
+        var msg = msg_input.value
+        var url = '{{ url_for("get_messages") }}?room={{ room }}'
+        xhttp.open('GET', url, true);
+        xhttp.send();
+        
+        // Refresh the chat window every 3 seconds
+        setTimeout(function() {
+            refresh()
+        }, 3000); 
+    }
+    
+    refresh();
+    
+    </script>
 
 {% endblock %}
