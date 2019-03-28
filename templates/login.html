@@ -4,11 +4,18 @@
 
 <form method="POST" action="">
     <input type="text" name="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Password">
     <input type="submit" value="Login">
 </form>
 
-{% if error == 'nouser' %}
-<p class="error">No username was entered.</p>
+{% if error %}
+<p class="error">
+    {% if error == 'nouser' %}
+        No username was entered.
+    {% elif error == 'invalidlogin' %}
+        Invalid login.
+    {% endif %}
+</p>
 {% endif %}
 
 {% endblock %}
