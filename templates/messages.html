@@ -1,5 +1,5 @@
 {% for msg in messages %}
-<div id="{{ msg._id }}" class="msg {{ loop.cycle('msg-light', 'msg-dark') }}">
+<div id="{{ msg._id }}" class="msg {{ loop.cycle('light', 'dark') }}">
     <h3 class="msg-author">{{ msg.author }}</h3>
     <h6 class="msg-date">{{ msg.date.strftime('%a, %b %d, %Y @ %I:%M%p') }}</h6>
     <p class="msg-content">{{ msg.content }}</p>
