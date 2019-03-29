@@ -26,14 +26,6 @@
     margin-top: 10px;
 }
 
-.msg-light {
-    background-color: rgb(41, 41, 41);
-}
-
-.msg-dark {
-    background-color: rgb(24, 24, 24);
-}
-
 .message {
     width: auto;
 }

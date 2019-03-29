@@ -45,3 +45,24 @@ input[type=submit]:hover, button:hover {
 .error {
     color: rgb(185, 0, 0);
 }
+
+.light {
+    background-color: rgb(41, 41, 41);
+}
+
+.dark {
+    background-color: rgb(24, 24, 24);
+}
+
+a.room {
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid white;
+    padding: 5px;
+    color: white;
+}
+
+a.room:hover {
+    color: rgb(194, 194, 194);
+    padding-left: 10px;
+}
