@@ -20,6 +20,7 @@ logger = Logger('chat.log')
 # Index, shows the chatrooms
 @app.route('/')
 def index():
+
     if 'username' not in session:
         return redirect(url_for('login'))
     
