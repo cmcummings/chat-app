@@ -5,9 +5,9 @@ class Logger:
     """Logs messages."""
 
     def __init__(self, log_path):
-        self.log = open(log_path, "w+")
+        self.log = open(log_path, "a+")
 
-    def add_entry(self, room, author, message):
+    def message(self, room, author, message):
         entry = "[{}] {} - {}: {}".format(str(datetime.now()), room, author, message)
         print(entry)
         self.log.write(entry + "\n")
