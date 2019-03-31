@@ -14,7 +14,7 @@ db = Connection(app, 'localhost', 27017)
 # Initialize chatlogger
 from chatlog import Logger
 logger = Logger('chat.log')
-
+# logger.message('global', 'admin', 'test')
 
 
 # Index, shows the chatrooms
@@ -81,7 +81,7 @@ def send_message():
     author = session['username']
     content = request.args.get('msg', '')
     
-    logger.add_entry(room, author, content)
+    logger.message(room, author, content)
     db.add_message(room, author, content)
     messages = db.get_messages(room)
     return render_template('messages.html', messages=messages)
@@ -97,4 +97,4 @@ def get_messages():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0') # Run on local network
+    app.run(host='0.0.0.0') # Run on local network, use ifconfig to find ip
