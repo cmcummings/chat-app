@@ -57,12 +57,23 @@ input[type=submit]:hover, button:hover {
 a.room {
     display: inline-block;
     text-decoration: none;
-    border: 1px solid white;
+    border-left: 1px solid white;
+    padding: 5px;
+    color: white;
+    margin: 0 0 2px 0;
+}
+
+a.room:hover {
+    background-color: rgb(59, 59, 59);
+    margin-left: 5px;
+}
+
+a.home {
+    text-decoration: none;
     padding: 5px;
     color: white;
 }
 
-a.room:hover {
-    color: rgb(194, 194, 194);
-    padding-left: 10px;
+a.home:hover {
+    background-color: rgb(59, 59, 59);
 }
