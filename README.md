@@ -2,7 +2,7 @@
 
 Users can log in and join a chatroom where they can chat with other users. Chatrooms are persistent.
 
-The website uses a Flask and MongoDB backend along with Flask's templating engine to generate what the web pages.
+The website uses a Flask and MongoDB backend. Flask's templating engine is used to generate the web pages.
 
 ## Screenshots
 
